@@ -375,13 +375,19 @@ namespace SwitchEducation {
     export function ledmeter(value: number): void{
         let x = 0
         let y = 0
-        basic.clearScreen()
-        for(let i = 0; i < value; i++){
-            led.plot(x, 4-y)
-            x++;
-            if(x == 5){
-                x = 0;
-                y++;
+        let maxLedNum = 25
+        
+        for(let i = 0; i < maxLedNum ; i++){
+            if(i < value){
+                led.plot(x, 4-y)
+                x++;
+                if(x == 5){
+                    x = 0;
+                    y++;
+                }
+            }
+            else{
+                led.unplot(x,4-y)
             }
         }
     }
