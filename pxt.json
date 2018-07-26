@@ -6,12 +6,7 @@
     "dependencies":{
         "core":"*"
     },
-    "files":["README.md",
-        "switcheducation.ts",
-        "soccer.ts",
-        "tapeled.ts",
-        "car.ts",
-        "robot.ts"],
+    "files":["README.md","switcheducation.ts","soccer.ts","tapeled.ts","car.ts","robot.ts"],
     "testFiles":[],
     "public":true
 }
