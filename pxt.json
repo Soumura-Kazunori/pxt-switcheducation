@@ -1,0 +1,12 @@
+{
+    "name":"pxt-switcheducation",
+    "veresion":"0.0.1",
+    "description":"Switch-Education",
+    "license":"MIT",
+    "dependencies":{
+        "core":"*"
+    },
+    "files":["README.md","switcheducation.ts"],
+    "testFiles":[],
+    "public":true
+}
