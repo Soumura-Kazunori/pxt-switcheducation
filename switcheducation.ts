@@ -23,14 +23,15 @@ namespace SwitchEducation {
         for(let i = 0; i < maxLedNum ; i++){
             if(i < value){
                 led.plot(x, 4-y)
-                x++;
-                if(x == 5){
-                    x = 0;
-                    y++;
-                }
+                
             }
             else{
                 led.unplot(x,4-y)
+            }
+            x++;
+            if(x == 5){
+                x = 0;
+                y++;
             }
         }
     }
