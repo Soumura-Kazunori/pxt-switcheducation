@@ -4,20 +4,21 @@
  * 詳しくはこちらを参照してください：https://makecode.microbit.org/blocks/custom
  */
 
-
-
 enum turnDir {
     //% block="右"
     right,
     //% block="左"
     left
 }
-enum turnDir {
-    //% block="右"
-    right,
-    //% block="左"
-    left
+
+enum wheelDir {
+    //% block="cw"
+    cw,
+    //% block="ccw"
+    ccw
 }
+
+
 /**
  * カスタムブロック
  */
@@ -263,4 +264,135 @@ namespace SwitchEducation {
             SwitchEducation.moveHeadServo(turnDir.right, 0, time)
         }
     }
+
+    /** 
+     * @param red 赤色, eg:500
+     * @param green 緑色, eg:500
+     * @param blue 青色, eg:500
+    */
+    //% subcategory="テープLED"
+    //% blockId="switch_education_tapeled_analog"
+    //% block="テープLED(アナログ) 赤　%red | 緑 %green | 青 %blue"
+    //% red.min=0 red.max=1023
+    //% green.min=0 green.max=1023
+    //% blue.min=0 blue.max=1023
+    export function tapeLedAnalog(red: number, green: number, blue: number): void {
+        pins.analogWritePin(AnalogPin.P0, green)
+        pins.analogWritePin(AnalogPin.P1, red)
+        pins.analogWritePin(AnalogPin.P2, blue)
+    }
+
+    /** 
+     * @param red 赤色, eg:0
+     * @param green 緑色, eg:0
+     * @param blue 青色, eg:0
+    */
+    //% subcategory="テープLED"
+    //% blockId="switch_education_tapeled_digital"
+    //% block="テープLED(デジタル) 赤　%red | 緑 %green | 青 %blue"
+    //% red.min=0 red.max=1
+    //% green.min=0 green.max=1
+    //% blue.min=0 blue.max=1
+    export function tapeLedDigital(red: number, green: number, blue: number): void {
+        pins.digitalWritePin(DigitalPin.P0, green)
+        pins.digitalWritePin(DigitalPin.P1, red)
+        pins.digitalWritePin(DigitalPin.P2, blue)
+    }
+
+
+
+
+
+     /**
+     * @param dir1 回転方向, eg:wheelDir.ccw
+     * @param speed1[0-90]  スピード, eg:0
+     * @param dir2 回転方向, eg:wheelDir.cw
+     * @param speed2[0-90]  スピード, eg:0
+     */
+    //% subcategory="soccer"
+    //% blockId="switch_education_wheel"
+    //% block="回転サーボ:P1 回転方向 %dir1 | スピード %speed1 |回転サーボ:P2 回転方向 %dir2 | スピード %speed2"
+    //% speed1.min=0 speed1.max=90
+    //% speed2.min=0 speed2.max=90
+    export function wheel(dir1: wheelDir, speed1: number, dir2: wheelDir, speed2: number): void {
+        if (speed1 > 90) {
+            speed1 = 90;
+        }
+        else if (speed1 < 0) {
+            speed1 = 0;
+        }
+        if (speed2 > 90) {
+            speed2 = 90;
+        }
+        else if (speed2 < 0) {
+            speed2 = 0;
+        }
+
+        if (dir1 == wheelDir.cw) {
+            pins.servoWritePin(AnalogPin.P1, 90 - speed1)
+        }
+        else {
+            pins.servoWritePin(AnalogPin.P1, 90 + speed1)
+        }
+        if (dir2 == wheelDir.cw) {
+            pins.servoWritePin(AnalogPin.P2, 90 - speed2)
+        }
+        else {
+            pins.servoWritePin(AnalogPin.P2, 90 + speed2)
+        }
+    }
+
+    /**
+     * @param angle[0-180] 角度 ,eg:90
+     */
+    //% subcategory="soccer"
+    //% blockId="switch_education_servo"
+    //% block="追加サーボ:P0 角度 %angle"
+    //% angle.min=0 angle.max=180
+    export function 追加サーボ(angle: number): void {
+        pins.servoWritePin(AnalogPin.P0, angle)
+    }
+
+    /**
+     * @param
+     */
+    //% subcategory="soccer"
+    //% blockId="switch_education_rote_servo"
+    //% block="追加回転サーボ:P0 回転方向 %dir | スピード %speed"
+    //% speed.min=0 speed.max=90
+    export function 追加回転サーボ(dir: wheelDir, speed: number): void {
+        if (dir == wheelDir.cw) {
+            pins.servoWritePin(AnalogPin.P0, 90 - speed)
+        }
+        else {
+            pins.servoWritePin(AnalogPin.P0, 90 + speed)
+        }
+    }
+
+    //% blockId="switch_education_ledmeter"
+    //% block="LED点灯数 %value"
+    //% value.min=0 value.max=25
+    export function ledmeter(value: number): void{
+        let x = 0
+        let y = 0
+        basic.clearScreen()
+        for(let i = 0; i < value; i++){
+            led.plot(x, 4-y)
+            x++;
+            if(x == 5){
+                x = 0;
+                y++;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 }
