@@ -24,7 +24,7 @@ namespace SwitchEducation {
     let cancelAction = 0
 
     /**
-     * @param direction 回転方向, eg:servoDir.right
+     * @param direction 回転方向, eg:turnDir.right
      * @param targetAngle 目標角度, eg:0
      * @param time 移動時間, eg:1000
      */
@@ -32,9 +32,9 @@ namespace SwitchEducation {
     //% blockId="switch_education_robot_head"
     //% block="頭サーボ:P1 回転方向 %direction | 角度 %angle | 時間(ms) %time"
     //% targetAngle.min=0 targetAngle.max=90
-    export function moveHeadServo(direction: servoDir, angle: number, time: number): void {
+    export function moveHeadServo(direction: turnDir, angle: number, time: number): void {
         let targetAngle = 0
-        if (direction == servoDir.right) {
+        if (direction == turnDir.right) {
             targetAngle = originHeadAngle + angle
         }
         else {
@@ -84,19 +84,19 @@ namespace SwitchEducation {
     //% subcategory="robot"
     //% blockId="switch_education_root_foot"
     //% block="右足サーボ:P0　回転方向 %rightFootDir | 角度　%rightFootAngle | 左足サーボ:P2　回転方向 %leftFootDir | 角度 %leftFootAngle | 時間(ms) %time"
-    export function moveFootServo(rightFootDir: servoDir, rightFootAngle: number, leftFootDir: servoDir, leftFootAngle: number, time: number): void {
+    export function moveFootServo(rightFootDir: turnDir, rightFootAngle: number, leftFootDir: turnDir, leftFootAngle: number, time: number): void {
         let targetRightFootAngle = 0
         let targetLeftFootAngle = 0
 
 
-        if (rightFootDir == servoDir.right) {
+        if (rightFootDir == turnDir.right) {
             targetRightFootAngle = originRightFootAngle + rightFootAngle
         }
         else {
             targetRightFootAngle = originRightFootAngle - rightFootAngle
         }
 
-        if (leftFootDir == servoDir.right) {
+        if (leftFootDir == turnDir.right) {
             targetLeftFootAngle = originLeftFootAngle + leftFootAngle
         }
         else {
@@ -147,13 +147,13 @@ namespace SwitchEducation {
         cancelAction = 0
         for (let i = 0; i < step; i++) {
             if (cancelAction == 1) { break }
-            SwitchEducation.moveHeadServo(servoDir.right, 30, time)
+            SwitchEducation.moveHeadServo(turnDir.right, 30, time)
             if (cancelAction == 1) { break }
-            SwitchEducation.moveFootServo(servoDir.left, 30, servoDir.left, 30, time)
+            SwitchEducation.moveFootServo(turnDir.left, 30, turnDir.left, 30, time)
             if (cancelAction == 1) { break }
-            SwitchEducation.moveHeadServo(servoDir.left, 30, time)
+            SwitchEducation.moveHeadServo(turnDir.left, 30, time)
             if (cancelAction == 1) { break }
-            SwitchEducation.moveFootServo(servoDir.right, 30, servoDir.right, 30, time)
+            SwitchEducation.moveFootServo(turnDir.right, 30, turnDir.right, 30, time)
         }
         SwitchEducation.upright(speed)
     }
@@ -165,8 +165,8 @@ namespace SwitchEducation {
     //% block="直立姿勢 %speed"
     //% speed.min=0 speed.max=10
     export function upright(speed: number): void {
-        SwitchEducation.moveHeadServo(servoDir.right, 0, 2500 - speed * 200)
-        SwitchEducation.moveFootServo(servoDir.right, 0, servoDir.right, 0, 2500 - speed * 200)
+        SwitchEducation.moveHeadServo(turnDir.right, 0, 2500 - speed * 200)
+        SwitchEducation.moveFootServo(turnDir.right, 0, turnDir.right, 0, 2500 - speed * 200)
     }
 
     /**
@@ -182,13 +182,13 @@ namespace SwitchEducation {
         cancelAction = 0
         for (let i = 0; i < step; i++) {
             if (cancelAction == 1) { break }
-            SwitchEducation.moveHeadServo(servoDir.right, 30, time)
+            SwitchEducation.moveHeadServo(turnDir.right, 30, time)
             if (cancelAction == 1) { break }
-            SwitchEducation.moveFootServo(servoDir.right, 30, servoDir.right, 30, time)
+            SwitchEducation.moveFootServo(turnDir.right, 30, turnDir.right, 30, time)
             if (cancelAction == 1) { break }
-            SwitchEducation.moveHeadServo(servoDir.left, 30, time)
+            SwitchEducation.moveHeadServo(turnDir.left, 30, time)
             if (cancelAction == 1) { break }
-            SwitchEducation.moveFootServo(servoDir.left, 30, servoDir.left, 30, time)
+            SwitchEducation.moveFootServo(turnDir.left, 30, turnDir.left, 30, time)
         }
         SwitchEducation.upright(speed)
     }
@@ -214,25 +214,25 @@ namespace SwitchEducation {
         if (direction == turnDir.right) {
             for (let i = 0; i < step; i++) {
                 if (cancelAction == 1) { break }
-                SwitchEducation.moveHeadServo(servoDir.left, 30, time)
+                SwitchEducation.moveHeadServo(turnDir.left, 30, time)
                 if (cancelAction == 1) { break }
-                SwitchEducation.moveFootServo(servoDir.right, 0, servoDir.left, 45, time)
+                SwitchEducation.moveFootServo(turnDir.right, 0, turnDir.left, 45, time)
                 if (cancelAction == 1) { break }
-                SwitchEducation.moveHeadServo(servoDir.right, 30, time)
+                SwitchEducation.moveHeadServo(turnDir.right, 30, time)
                 if (cancelAction == 1) { break }
-                SwitchEducation.moveFootServo(servoDir.right, 0, servoDir.right, 0, time)
+                SwitchEducation.moveFootServo(turnDir.right, 0, turnDir.right, 0, time)
             }
         }
         else if (direction == turnDir.left) {
             for (let i = 0; i < step; i++) {
                 if (cancelAction == 1) { break }
-                SwitchEducation.moveHeadServo(servoDir.right, 30, time)
+                SwitchEducation.moveHeadServo(turnDir.right, 30, time)
                 if (cancelAction == 1) { break }
-                SwitchEducation.moveFootServo(servoDir.right, 45, servoDir.right, 0, time)
+                SwitchEducation.moveFootServo(turnDir.right, 45, turnDir.right, 0, time)
                 if (cancelAction == 1) { break }
-                SwitchEducation.moveHeadServo(servoDir.left, 30, time)
+                SwitchEducation.moveHeadServo(turnDir.left, 30, time)
                 if (cancelAction == 1) { break }
-                SwitchEducation.moveFootServo(servoDir.right, 0, servoDir.right, 0, time)
+                SwitchEducation.moveFootServo(turnDir.right, 0, turnDir.right, 0, time)
             }
         }
         SwitchEducation.upright(speed)
@@ -248,11 +248,11 @@ namespace SwitchEducation {
     export function kick(foot: turnDir, speed: number): void {
         let time = 2500 - 200 * speed
         if (foot == turnDir.right) {
-            SwitchEducation.moveHeadServo(servoDir.left, 30, time)
-            SwitchEducation.moveFootServo(servoDir.left, 0, servoDir.left, 50, time)
-            SwitchEducation.moveFootServo(servoDir.right, 50, servoDir.right, 50, 0)
-            SwitchEducation.moveFootServo(servoDir.right, 0, servoDir.right, 0, time)
-            SwitchEducation.moveHeadServo(servoDir.right, 0, time)
+            SwitchEducation.moveHeadServo(turnDir.left, 30, time)
+            SwitchEducation.moveFootServo(turnDir.left, 0, turnDir.left, 50, time)
+            SwitchEducation.moveFootServo(turnDir.right, 50, turnDir.right, 50, 0)
+            SwitchEducation.moveFootServo(turnDir.right, 0, turnDir.right, 0, time)
+            SwitchEducation.moveHeadServo(turnDir.right, 0, time)
         }
     }
 }
