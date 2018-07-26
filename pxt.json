@@ -6,7 +6,7 @@
     "dependencies":{
         "core":"*"
     },
-    "files":["README.md","switcheducation.ts"],
+    "files":["README.md","switcheducation.ts","custom.ts"],
     "testFiles":[],
     "public":true
 }
