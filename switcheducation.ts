@@ -370,7 +370,7 @@ namespace SwitchEducation {
     }
 
     //% blockId="switch_education_ledmeter"
-    //% block="LED点灯数 %value"
+    //% block="LEDを %value 個つける"
     //% value.min=0 value.max=25
     export function ledmeter(value: number): void{
         let x = 0
